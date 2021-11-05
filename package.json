@@ -1,7 +1,7 @@
 {
   "name": "@coinset/huobi",
   "description": "Huobi API client",
-  "version": "0.0.0",
+  "version": "1.0.0-beta.1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -31,7 +31,7 @@
   "sideEffects": false,
   "license": "MIT",
   "dependencies": {
-    "cryptocurrency-types": "^1.0.0-beta.6",
+    "cryptocurrency-types": "^1.0.0-beta.10",
     "node-fetch": "^2.6.6"
   },
   "devDependencies": {

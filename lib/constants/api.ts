@@ -1,0 +1,11 @@
+export const BASE_URL = 'https://api-cloud.huobi.co.jp/'
+
+export const V1_COMMON_SYMBOLS = 'v1/common/symbols'
+export const V1_COMMON_CURRENCYS = 'v1/common/currencys'
+export const V1_COMMON_TIMESTAMP = 'v1/common/timestamp'
+export const MARKET_DETAIL_MARGED = 'market/detail/merged'
+export const MARKET_TICKERS = 'market/tickers'
+export const MARKET_DEPTH = 'market/depth'
+export const MARKET_TRADE = 'market/trade'
+export const MARKET_HISTORY_TRADE = 'market/history/trade'
+export const MARKET_HISTORY_KLINE = 'market/history/kline'
