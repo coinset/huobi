@@ -1,4 +1,4 @@
-import { BASE_URL, COMMON_SYMBOLS } from '@/constants/api'
+import { BASE_URL, V1_COMMON_SYMBOLS } from '@/constants/api'
 import { jsonFetch } from '@/shared/fetch'
 import type { HuobiPair } from '@/shared/types/currency'
 import type { SimplePublicAPI } from '@/shared/types/fetch'
@@ -43,7 +43,7 @@ const fetchSymbols: SimplePublicAPI<SymbolsOptions, SymbolsResponse> = (
   _,
   init
 ) => {
-  const url = new URL(COMMON_SYMBOLS, BASE_URL)
+  const url = new URL(V1_COMMON_SYMBOLS, BASE_URL)
   return jsonFetch(url, init)
 }
 

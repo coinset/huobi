@@ -1,4 +1,4 @@
-import { BASE_URL, COMMON_CURRENCYS } from '@/constants/api'
+import { BASE_URL, V1_COMMON_CURRENCYS } from '@/constants/api'
 import { jsonFetch } from '@/shared/fetch'
 import type { SimplePublicAPI } from '@/shared/types/fetch'
 
@@ -14,7 +14,7 @@ const fetchCurrencys: SimplePublicAPI<CurrencysOptions, CurrencysResponse> = (
   options,
   init
 ) => {
-  const url = new URL(COMMON_CURRENCYS, BASE_URL)
+  const url = new URL(V1_COMMON_CURRENCYS, BASE_URL)
   return jsonFetch(url, init)
 }
 
