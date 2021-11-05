@@ -1,17 +1,16 @@
 import { BASE_URL, V1_COMMON_CURRENCYS } from '@/constants/api'
 import { jsonFetch } from '@/shared/fetch'
-import type { SimplePublicAPI } from '@/shared/types/fetch'
+import type { SimplePublicAPI, Response } from '@/shared/types/fetch'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type CurrencysOptions = {}
 
-type CurrencysResponse = {
-  status: 'ok'
+type CurrencysResponse = Response<{
   data: string[]
-}
+}>
 
 const fetchCurrencys: SimplePublicAPI<CurrencysOptions, CurrencysResponse> = (
-  options,
+  _,
   init
 ) => {
   const url = new URL(V1_COMMON_CURRENCYS, BASE_URL)

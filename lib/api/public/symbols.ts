@@ -1,13 +1,12 @@
 import { BASE_URL, V1_COMMON_SYMBOLS } from '@/constants/api'
 import { jsonFetch } from '@/shared/fetch'
 import type { HuobiPair } from '@/shared/types/currency'
-import type { SimplePublicAPI } from '@/shared/types/fetch'
+import type { SimplePublicAPI, Response } from '@/shared/types/fetch'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type SymbolsOptions = {}
 
-type SymbolsResponse = {
-  status: 'ok'
+type SymbolsResponse = Response<{
   data: {
     'base-currency': string
     'quote-currency': string
@@ -37,7 +36,7 @@ type SymbolsResponse = {
     'buy-market-max-order-value': number
     'api-trading': 'enabled'
   }[]
-}
+}>
 
 const fetchSymbols: SimplePublicAPI<SymbolsOptions, SymbolsResponse> = (
   _,

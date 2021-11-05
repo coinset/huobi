@@ -6,6 +6,7 @@ describe('fetchCurrencys', () => {
     const result = await fetchCurrencys()
 
     expect(result.status).toMatch(/ok|error/)
+    if (result.status === 'error') return
 
     expect(result.data).toEqual(expect.any(Array))
 

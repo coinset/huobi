@@ -1,15 +1,14 @@
 import { BASE_URL, V1_COMMON_TIMESTAMP } from '@/constants/api'
 import { jsonFetch } from '@/shared/fetch'
 import { defineReviver } from '@/shared/parse'
-import type { SimplePublicAPI } from '@/shared/types/fetch'
+import type { SimplePublicAPI, Response } from '@/shared/types/fetch'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type TimestampOptions = {}
 
-type TimestampResponse = {
-  status: 'ok'
+type TimestampResponse = Response<{
   data: Date
-}
+}>
 
 const reviver = defineReviver((key, value) => {
   if (key === 'data' && typeof value === 'number') {
