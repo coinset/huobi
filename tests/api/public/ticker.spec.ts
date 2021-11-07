@@ -1,4 +1,15 @@
 import { fetchTicker } from '@/api/public/ticker'
+import type { Tick } from '@/api/public/ticker'
+
+const expectTick = ({ amount, count, open, close, low, high, vol }: Tick) => {
+  expect(amount).toBeNumber()
+  expect(count).toBeNumber()
+  expect(open).toBeNumber()
+  expect(close).toBeNumber()
+  expect(low).toBeNumber()
+  expect(high).toBeNumber()
+  expect(vol).toBeNumber()
+}
 
 describe('fetchTicker', () => {
   it('should return currency pairs info', async () => {
@@ -6,32 +17,30 @@ describe('fetchTicker', () => {
       symbol: 'btcjpy'
     })
 
-    expect(result.status).toMatch(/ok|error/)
+    expect(result.status).toBeOneOf(['ok', 'error'])
 
     if (result.status === 'error') return
 
-    expect(result.ch).toEqual(expect.any(String))
-    expect(result.tick).toEqual(expect.any(Object))
-    expect(result.ts).toEqual(expect.any(Date))
+    expect(result.ch).toBeString()
+    expect(result.tick).toBeObject()
+    expect(result.ts).toBeAfter(new Date('2000/1/1'))
 
-    const { id, bid, ask, amount, count, open, close, low, high, vol } =
-      result.tick
+    const { id, bid, ask } = result.tick
 
-    expect(id).toEqual(expect.any(Number))
-    expect(bid).toEqual(expect.any(Array))
-    expect(bid).toHaveLength(2)
-    expect(bid[0]).toEqual(expect.any(Number))
-    expect(bid[1]).toEqual(expect.any(Number))
-    expect(ask).toEqual(expect.any(Array))
-    expect(ask).toHaveLength(2)
-    expect(ask[0]).toEqual(expect.any(Number))
-    expect(ask[1]).toEqual(expect.any(Number))
-    expect(amount).toEqual(expect.any(Number))
-    expect(count).toEqual(expect.any(Number))
-    expect(open).toEqual(expect.any(Number))
-    expect(close).toEqual(expect.any(Number))
-    expect(low).toEqual(expect.any(Number))
-    expect(high).toEqual(expect.any(Number))
-    expect(vol).toEqual(expect.any(Number))
+    expect(id).toBeNumber()
+
+    const expectPriceAmount = (value: [number, number]) => {
+      expect(value).toBeArray()
+      expect(value).toHaveLength(2)
+      expect(value[0]).toBeNumber()
+      expect(value[1]).toBeNumber()
+    }
+
+    expectPriceAmount(ask)
+    expectPriceAmount(bid)
+
+    expectTick(result.tick)
   })
 })
+
+export { expectTick }

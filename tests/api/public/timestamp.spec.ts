@@ -8,6 +8,6 @@ describe('fetchTimestamp', () => {
 
     if (result.status === 'error') return
 
-    expect(result.data).toEqual(expect.any(Date))
+    expect(result.data).toBeAfter(new Date('2000/1/1'))
   })
 })

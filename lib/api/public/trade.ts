@@ -35,9 +35,7 @@ const fetchTrade: PublicAPI<TradeOptions, TradeResponse> = (
 ) => {
   const url = new URL(MARKET_TRADE, BASE_URL)
 
-  url.search = new URLSearchParams({
-    symbol
-  }).toString()
+  url.searchParams.set('symbol', symbol)
 
   return jsonFetch(url, init, {
     parseJson: reviver
