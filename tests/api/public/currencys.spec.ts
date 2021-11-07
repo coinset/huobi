@@ -5,15 +5,11 @@ describe('fetchCurrencys', () => {
   it('should return currency pairs info', async () => {
     const result = await fetchCurrencys()
 
-    expect(result.status).toMatch(/ok|error/)
+    expect(result.status).toBeOneOf(['ok', 'error'])
     if (result.status === 'error') return
 
-    expect(result.data).toEqual(expect.any(Array))
+    expect(result.data).toBeArray()
 
-    expect(result.data).toHaveLength(ALL_HUOBI_SYMBOLS.length)
-
-    ALL_HUOBI_SYMBOLS.forEach((symbol) => {
-      expect(result.data).toContain(symbol)
-    })
+    expect(result.data).toIncludeSameMembers(ALL_HUOBI_SYMBOLS)
   })
 })

@@ -6,23 +6,25 @@ describe('fetchKline', () => {
       symbol: 'btcjpy'
     })
 
-    expect(result.status).toMatch(/ok|error/)
+    expect(result.status).toBeOneOf(['ok', 'error'])
 
     if (result.status === 'error') return
 
-    expect(result.ch).toEqual(expect.any(String))
-    expect(result.data).toEqual(expect.any(Array))
-    expect(result.ts).toEqual(expect.any(Date))
+    expect(result.ch).toBeString()
+    expect(result.data).toBeArray()
+    expect(result.ts).toBeAfter(new Date('2000/1/1'))
 
-    const { id, open, close, low, high, amount, vol, count } = result.data[0]
-
-    expect(id).toEqual(expect.any(Number))
-    expect(open).toEqual(expect.any(Number))
-    expect(close).toEqual(expect.any(Number))
-    expect(low).toEqual(expect.any(Number))
-    expect(high).toEqual(expect.any(Number))
-    expect(amount).toEqual(expect.any(Number))
-    expect(vol).toEqual(expect.any(Number))
-    expect(count).toEqual(expect.any(Number))
+    result.data.forEach(
+      ({ id, open, close, low, high, amount, vol, count }) => {
+        expect(id).toBeNumber()
+        expect(open).toBeNumber()
+        expect(close).toBeNumber()
+        expect(low).toBeNumber()
+        expect(high).toBeNumber()
+        expect(amount).toBeNumber()
+        expect(vol).toBeNumber()
+        expect(count).toBeNumber()
+      }
+    )
   })
 })

@@ -1,5 +1,7 @@
+// eslint-disable-next-line import/no-unresolved
+import { expectTick } from '@test/api/public/ticker.spec'
+
 import { fetchTickers } from '@/api/public/tickers'
-import { ALL_HUOBI_PAIRS } from '@/constants/pair'
 
 describe('fetchTickers', () => {
   it('should return currency pairs info', async () => {
@@ -9,37 +11,36 @@ describe('fetchTickers', () => {
 
     if (result.status === 'error') return
 
-    expect(result.data).toEqual(expect.any(Array))
-    expect(result.ts).toEqual(expect.any(Date))
+    expect(result.data).toBeArray()
+    expect(result.ts).toBeAfter(new Date('2000/1/1'))
 
-    const {
-      bid,
-      ask,
-      bidSize,
-      askSize,
-      amount,
-      count,
-      open,
-      close,
-      low,
-      high,
-      vol
-    } = result.data[0]
+    result.data.forEach((tick) => {
+      expectTick(tick)
+      const {
+        bid,
+        ask,
+        bidSize,
+        askSize,
+        amount,
+        count,
+        open,
+        close,
+        low,
+        high,
+        vol
+      } = tick
 
-    result.data.forEach(({ symbol }) => {
-      expect(ALL_HUOBI_PAIRS).toContain(symbol)
+      expect(bid).toBeNumber()
+      expect(bidSize).toBeNumber()
+      expect(ask).toBeNumber()
+      expect(askSize).toBeNumber()
+      expect(amount).toBeNumber()
+      expect(count).toBeNumber()
+      expect(open).toBeNumber()
+      expect(close).toBeNumber()
+      expect(low).toBeNumber()
+      expect(high).toBeNumber()
+      expect(vol).toBeNumber()
     })
-
-    expect(bid).toEqual(expect.any(Number))
-    expect(bidSize).toEqual(expect.any(Number))
-    expect(ask).toEqual(expect.any(Number))
-    expect(askSize).toEqual(expect.any(Number))
-    expect(amount).toEqual(expect.any(Number))
-    expect(count).toEqual(expect.any(Number))
-    expect(open).toEqual(expect.any(Number))
-    expect(close).toEqual(expect.any(Number))
-    expect(low).toEqual(expect.any(Number))
-    expect(high).toEqual(expect.any(Number))
-    expect(vol).toEqual(expect.any(Number))
   })
 })

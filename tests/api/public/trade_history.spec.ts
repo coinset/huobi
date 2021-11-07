@@ -10,21 +10,23 @@ describe('fetchTradeHistory', () => {
 
     if (result.status === 'error') return
 
-    expect(result.ch).toEqual(expect.any(String))
-    expect(result.ts).toEqual(expect.any(Date))
-    expect(result.data).toEqual(expect.any(Array))
+    expect(result.ch).toBeString()
+    expect(result.ts).toBeAfter(new Date('2000/1/1'))
+    expect(result.data).toBeArray()
 
     const { id, ts, data } = result.data[0]
-    expect(id).toEqual(expect.any(Number))
-    expect(ts).toEqual(expect.any(Date))
-    expect(data).toEqual(expect.any(Array))
+    expect(id).toBeNumber()
+    expect(ts).toBeAfter(new Date('2000/1/1'))
+    expect(data).toBeArray()
 
-    const { amount, direction, price } = data[0]
-    expect(amount).toEqual(expect.any(Number))
-    expect(direction).toMatch(/buy|sell/)
-    expect(price).toEqual(expect.any(Number))
-    expect(data[0].id).toEqual(expect.any(Number))
-    expect(data[0].ts).toEqual(expect.any(Date))
-    expect(data[0]['trade-id']).toEqual(expect.any(Number))
+    data.forEach((v) => {
+      const { amount, direction, price, id, ts } = v
+      expect(amount).toBeNumber()
+      expect(direction).toBeOneOf(['buy', 'sell'])
+      expect(price).toBeNumber()
+      expect(id).toBeNumber()
+      expect(ts).toBeAfter(new Date('2000/1/1'))
+      expect(v['trade-id']).toBeNumber()
+    })
   })
 })
