@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/coinset/huobi/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-01-09)
+
+
+### Features
+
+* switch code base to deno ([28e6217](https://github.com/coinset/huobi/commit/28e6217179d3bf4b34c8db7704862c7e2f100dcb))
+
 # v1.0.0-beta.1 (2021-11-05)
 
 ## ✨ New Features
