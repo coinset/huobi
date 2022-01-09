@@ -1,3 +1,5 @@
 # @coinset/huobi
 
-WIP
+Universal Huobi API client
+
+:children_crossing: This is not official
